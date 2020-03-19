@@ -6,11 +6,11 @@
         <h3>{{competition.event_name}}</h3>
       </div>
       <div class='winner'>
-        <h5>Winner: {{competition.winner_first_name}} {{competition.winner_last_name}}</h5>
+        <h5>Winner:<br/>{{competition.winner_first_name}} {{competition.winner_last_name}}</h5>
         <img :src="competition.winner_avatar">
       </div>
       <div class="sponsor">
-        <h5>Event Sponsor: {{competition.sponsor}}</h5>
+        <h5>Event Sponsor:<br/>{{competition.sponsor}}</h5>
         <p>{{competition.sponsor_catch_phrase}}</p>
       </div>
     </div>
@@ -51,22 +51,23 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 250px;
+  width: 220px;
   margin: 30px;
+  min-height: 500px;
 }
 
 .title {
   border: solid blue 1px;
   border-radius: 8px;
   margin: 10px;
-  width: 220px;
-}
-
-.title h1{ 
+  width: 200px;
+  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+
 
 .winner {
   display: flex;
@@ -77,21 +78,21 @@ export default {
 
 .winner img {
   border: 2px solid #333;
-  height: 250px;
-  width: 200px;
+  height: 150px;
+  width: 120px;
   object-fit: cover;
   margin-bottom: 15px;
   margin-top: 15px;
 }
 
 .sponsor {
-  border: solid blue 1px;
-  border-radius: 8px;
+  border-top: solid blue 1px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   width: 200px;
+  min-height: 120px;
 }
 
 .sponsor p {
