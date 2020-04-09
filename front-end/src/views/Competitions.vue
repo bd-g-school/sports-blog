@@ -1,13 +1,6 @@
 <template>
   <div class="competitions-home">
-    <div id="navbar" class='not-sticky'>
-      <a href="#football-games">Football Games</a>
-      <a href="#track-meets">Track Meets</a>
-    </div>
-    <h1 id = "football-games">Previously Hosted Football Games</h1>
-    <CompetitionList :competitions='football_competitions' />
-    <h1 id = "track-meets">Previously Hosted Track Meets</h1>
-    <CompetitionList :competitions='track_competitions' />
+    <CompetitionList />
   </div>
 </template>
 
@@ -19,33 +12,6 @@ export default {
   name: 'Competitions',
   components: {
     CompetitionList
-  },
-  computed: {
-    football_competitions(){
-      return this.$root.$data.football_competitions;
-    },
-    track_competitions(){
-      return this.$root.$data.track_competitions;
-    },
-  },
-  created () {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  methods: {
-    handleScroll () {
-      var navbar = document.getElementById("navbar");
-      var menuheader = document.getElementById("menu-header");
-      // var sticky = navbar.offsetTop;
-      var headerHeight = menuheader.offsetHeight;
-      if (window.pageYOffset >= headerHeight) {
-        navbar.classList.add("sticky");
-      } else {
-        navbar.classList.remove("sticky");
-      }
-    }
   },
 }
 </script>

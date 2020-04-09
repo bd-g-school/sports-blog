@@ -3,7 +3,7 @@
     <h1>Behold, the Greatest Stats Ever!</h1>
     <p>Not really. But hey, we tried. <br/> Scroll to the bottom to submit your own!</p>
     <hr>
-    <StatSubmission :stats='stats' />
+    <StatSubmission />
   </div>
 </template>
 
@@ -16,11 +16,6 @@ export default {
   components: {
     StatSubmission
   },
-  computed: {
-    stats(){
-      return this.$root.$data.stats;
-    }
-  }
 }
 </script>
 

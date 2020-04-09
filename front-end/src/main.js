@@ -3,8 +3,10 @@ import App from './App.vue'
 import router from './router'
 import track_competition_data from './assets/track-mock-data.json'
 import football_competition_data from './assets/football-mock-data.json'
+import vSelect from 'vue-select'
 import 'bootstrap'
 
+Vue.component('v-select', vSelect)
 Vue.config.productionTip = false
 
 let data = {

@@ -4,11 +4,26 @@
       <h4>No stats yet to display - submit yours today!</h4>
     </div>
     <div v-else>
-      <h4>Crazy Stats!</h4>
       <div v-for="stat in stats" :key='stat.id'>
           <hr>
-          <p>{{stat.text}}</p>
-          <p><i>-- {{stat.author}} on {{stat.time}}</i></p>
+          <p class="stat-info">{{stat.stat}}</p>
+          <p><i>-- {{stat.name}}</i></p>
+          <div class="flex-row">
+            <button @click="verify(stat)">Verify!</button>
+            <button @click="debunk(stat)">Debunk!</button>
+          </div>
+          <div class="reviewCheck">
+            <p>Verified by {{stat.verified}} and debunked by {{stat.debunked}}</p>
+            <div v-if="stat.verified > stat.debunked">
+              <p>Most likely true!</p>
+            </div>
+            <div v-else-if="stat.verified < stat.debunked">
+              <p>Ehhh, better Google this one to double check</p>
+            </div>
+            <div v-else>
+              <p>Looks like there is some disagreement here - verify or debunk this stat to help others know if it's true!</p>
+            </div>
+          </div>
       </div>  
     </div> 
     <hr class='blue-hr'>
@@ -22,41 +37,81 @@
 </template>
 
 <script>
+import axios from 'axios';
+import "toastify-js/src/toastify.css";
+import Toastify from 'toastify-js';
+
 export default {
   name: 'StatSubmission',
-  props: {
-    stats: Array,
+  data () {
+    return {
+      addedName: '',
+      addedStat: '',
+      stats: []
+    }
+  },
+  created(){
+    this.getStats();
   },
   methods: {
-    addStat() {
-      var	now = new Date();
-			this.stats.push({
-        author: this.addedName,
-        text: this.addedStat,
-        time: now.toDateString() + " " + now.toLocaleTimeString()
-			});
-			this.addedName = '';
-			this.addedStat = '';
-		},
-  },
-  computed: {
-    addedName: {
-      get(){
-        return this.$root.$data.addedName;
-      },
-      set(newName){
-        this.$root.$data.addedName = newName;
-      } 
-    },
-    addedStat: {
-      get(){
-        return this.$root.$data.addedStat;
-      },
-      set(newStat) {
-        this.$root.$data.addedStat =  newStat;
+    async addStat() {
+      if (this.addedName == '' || this.addedStat == ''){
+        Toastify({
+          text: "Fill in all fields!",
+          duration: 3000,
+          backgroundColor: "#0000EE",
+          gravity: "bottom", 
+          position: 'right', 
+          stopOnFocus: true
+        }).showToast();
+        return;
+      }
+      try {
+        await axios.post("/api/stat", {
+          name: this.addedName,
+          stat: this.addedStat
+        });
+        this.addedName = '';
+        this.addedStat = '';
+
+        this.getStats();
+        return true;
+      } catch (error) {
+        console.log(error);
       }
     },
-  }
+    async getStats() {
+      try {
+        let response = await axios.get("/api/stat");
+        this.stats = response.data.stats;
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async verify(stat){
+      try {
+        await axios.put("/api/stat/" + stat._id, {
+          isVerification: true
+        });
+        this.getStats();
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async debunk(stat){
+      try {
+        await axios.put("/api/stat/" + stat._id, {
+          isDebunked: true
+        });
+        this.getStats();
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
 }
 </script>
 
@@ -90,6 +145,9 @@ textarea {
   justify-content: center;
   align-items: center;
 }
+.stat-info {
+  font-size: 1.6em;
+}
 
 .stat-submit-form {
   width: 80%;
@@ -98,5 +156,21 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviewCheck {
+  font-size: .8em;
+}
+
+.reviewCheck * {
+  margin: 0px;
+  padding: 0px;
 }
 </style>
