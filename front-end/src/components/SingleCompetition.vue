@@ -133,7 +133,7 @@ export default {
   flex-direction: column;
   width: 220px;
   margin: 30px;
-  min-height: 200px;
+  min-height: 400px;
   position: relative;
 }
 
