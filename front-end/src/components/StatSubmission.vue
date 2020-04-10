@@ -147,6 +147,7 @@ textarea {
 }
 .stat-info {
   font-size: 1.6em;
+  width: 80%;
 }
 
 .stat-submit-form {
