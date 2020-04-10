@@ -6,7 +6,7 @@
     <div v-else>
       <div v-for="stat in stats" :key='stat.id'>
         <div class="flex-column">
-          <hr>
+          <hr class="gray-hr">
           <p class="stat-info">{{stat.stat}}</p>
           <p><i>-- {{stat.name}}</i></p>
           <div class="flex-row">
@@ -125,9 +125,10 @@ button {
     margin: 2px;
 }
 
-hr {
-  height: 1px;
+.gray-hr {
+  height: 0px;
   border: 1px solid gray;
+  width: 70%;
 }
 
 .blue-hr {
