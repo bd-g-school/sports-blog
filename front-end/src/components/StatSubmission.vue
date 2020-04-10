@@ -125,6 +125,11 @@ button {
     margin: 2px;
 }
 
+hr {
+  height: 1px;
+  border: 1px solid gray;
+}
+
 .blue-hr {
   border: 2.5px solid blue;
   width: 75%;
