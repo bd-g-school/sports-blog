@@ -110,6 +110,7 @@ export default {
           event_type: this.new_event_type,
           sponsor: this.new_sponsor,
           event_name: this.new_event_name,
+          sponsor: this.new_sponsor,
           sponsor_catch_phrase: this.new_sponsor_catch_phrase
         });
         this.new_winner_first_name = '';
