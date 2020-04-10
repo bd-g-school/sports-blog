@@ -5,6 +5,7 @@
     </div>
     <div v-else>
       <div v-for="stat in stats" :key='stat.id'>
+        <div class="flex-column">
           <hr>
           <p class="stat-info">{{stat.stat}}</p>
           <p><i>-- {{stat.name}}</i></p>
@@ -24,6 +25,7 @@
               <p>Looks like there is some disagreement here - verify or debunk this stat to help others know if it's true!</p>
             </div>
           </div>
+        </div>
       </div>  
     </div> 
     <hr class='blue-hr'>
@@ -159,6 +161,12 @@ textarea {
   align-items: flex-start;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .flex-row {
   display: flex;
   flex-direction: row;
