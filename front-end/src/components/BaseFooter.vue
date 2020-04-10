@@ -3,7 +3,7 @@
     <hr class="footer-divide">
     <div class="footer">
       <li class = "info"><a class = "footer-link source-link" target="_blank"
-        href="https://github.com/bd-g/sports-blog">
+        href="https://github.com/bd-g/sports-blog/tree/cp4">
         Click Here for Source Code</a>
       </li>
     </div>
